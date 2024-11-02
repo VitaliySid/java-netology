@@ -20,11 +20,13 @@ public class NasaClient {
 
     public NasaAnswer getPictureDay() throws IOException {
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpResponse response;
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
-        HttpGet httpGet = new HttpGet(String.format(PICTURE_DAY_URL, apiKey));
+            HttpGet httpGet = new HttpGet(String.format(PICTURE_DAY_URL, apiKey));
 
-        CloseableHttpResponse response = httpClient.execute(httpGet);
+            response = httpClient.execute(httpGet);
+        }
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -33,11 +35,12 @@ public class NasaClient {
 
     public CloseableHttpResponse getImageData(NasaAnswer nasaAnswer) throws IOException {
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
-        HttpGet imageRequest = new HttpGet(nasaAnswer.getUrl());
+            HttpGet imageRequest = new HttpGet(nasaAnswer.getUrl());
 
-        return httpClient.execute(imageRequest);
+            return httpClient.execute(imageRequest);
+        }
     }
 
 }

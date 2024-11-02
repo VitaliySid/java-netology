@@ -38,10 +38,6 @@ public class NasaAnswer {
         return getFileNameFromUrl(url);
     }
 
-    public String getPictureHdName() {
-        return getFileNameFromUrl(hdUrl);
-    }
-
     private String getFileNameFromUrl(String url) {
         if(url != null && !url.trim().isEmpty())
             return url.substring(url.lastIndexOf("/") + 1);

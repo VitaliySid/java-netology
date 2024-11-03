@@ -1,11 +1,12 @@
-package org.example;
+package org.example.bot;
 
-import org.example.nasa.NasaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class Main {
@@ -23,9 +24,9 @@ public class Main {
 
 
     public static void loadProps() throws FileNotFoundException {
-        InputStream in = new FileInputStream("application.properties");
-        // load a properties file
-        try {
+        //InputStream in = new FileInputStream("application.properties");
+
+        try( InputStream in = Main.class.getResourceAsStream("application.properties")) {
             configProp.load(in);
         } catch (IOException e) {
             logger.error(e.getMessage());

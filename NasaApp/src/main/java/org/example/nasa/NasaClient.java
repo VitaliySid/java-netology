@@ -40,6 +40,16 @@ public class NasaClient {
         }
     }
 
+    public CloseableHttpResponse getImageData(NasaAnswer nasaAnswer) throws IOException {
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+
+            HttpGet imageRequest = new HttpGet(nasaAnswer.getUrl());
+
+            return httpClient.execute(imageRequest);
+        }
+    }
+
     private String buildUrl(String strDate) {
         var url = String.format(PICTURE_DAY_URL, apiKey);
 
